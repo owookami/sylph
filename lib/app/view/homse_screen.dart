@@ -84,6 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () async {
                       if(_phonseNumberController.text.isNotEmpty) {
                         await value.addPhoneNumber(_phonseNumberController.text);
+                        _phonseNumberController.text = '';
                       } else {
                         Get.snackbar('Error', '전화번호를 입력하세요.', snackPosition: SnackPosition.BOTTOM);
                       }

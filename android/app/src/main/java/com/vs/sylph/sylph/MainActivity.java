@@ -2,6 +2,7 @@ package com.vs.sylph.sylph;
 
 import android.Manifest;
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 
@@ -16,12 +17,15 @@ import io.flutter.plugin.common.MethodChannel.Result;
 
 import androidx.core.app.ActivityCompat;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends FlutterActivity {
 
     private static final String CHANNEL = "com.vs.sylph.sylph/callLog";
     private static final int REQUEST_CALL_LOG_PERMISSION = 1;
 
-    public void configureFlutterEngine(FlutterEngine flutterEngine) {
+    /*public void configureFlutterEngine(@FlutterEngine flutterEngine) {
         super.configureFlutterEngine(flutterEngine);
         new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), CHANNEL)
                 .setMethodCallHandler(
@@ -45,7 +49,30 @@ public class MainActivity extends FlutterActivity {
                             }
                         }
                 );
+    }*/
+
+    @Override
+    public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
+        super.configureFlutterEngine(flutterEngine);
+        new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), CHANNEL)
+                .setMethodCallHandler(
+                        (call, result) -> {
+                            if (call.method.equals("startMonitoringCalls")) {
+                                List<String> phoneNumbers = call.argument("phoneNumbers");
+                                Intent serviceIntent = new Intent(MainActivity.this, CallMonitoringService.class);
+                                serviceIntent.putStringArrayListExtra("phoneNumbers", new ArrayList<>(phoneNumbers));
+                                ContextCompat.startForegroundService(MainActivity.this, serviceIntent);
+                                result.success("Service started");
+                            }
+
+                            if (call.method.equals("moveTaskToBack")) {
+                                moveTaskToBack(true);
+                                result.success(null);
+                            }
+                        }
+                );
     }
+
 
     private boolean checkAndRequestPermissions() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {

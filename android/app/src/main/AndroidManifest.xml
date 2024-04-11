@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.READ_CALL_LOG"/>
     <uses-permission android:name="android.permission.WRITE_CALL_LOG"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <application
         android:label="sylph"
         android:name="${applicationName}"
@@ -31,5 +33,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <service android:name=".CallMonitoringService" android:foregroundServiceType="phoneCall" />
+        <receiver android:name=".StopServiceReceiver"/>
     </application>
 </manifest>

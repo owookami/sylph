@@ -31,10 +31,28 @@ class HomeController extends GetxController implements GetxService {
 
   }
 
-  Future<void> onStartPressed() async {
+  /*Future<void> onStartPressed() async {
     List<String> phoneNumbers = await fetchPhoneNumbersFromDatabase();
     await deleteMatchingCllLogs(phoneNumbers);
+  }*/
+
+  Future<void> onStartPressed() async {
+    //로컬에 저장 되어있는 전화 번호 목록을 가져 온다.
+    List<String> phoneNumbers = await fetchPhoneNumbersFromDatabase();
+
+    // Send the list to the Android side to start background monitoring and potential deletion of call logs.
+    try {
+
+      //background로 app 이동하여, 전화 통화 상태 모니터링 시작
+      await platform.invokeMethod('startMonitoringCalls', {'phoneNumbers': phoneNumbers});
+      Get.snackbar('Success', 'Monitoring started.', snackPosition: SnackPosition.BOTTOM);
+      //flutter 앱을 백그라운드로 이동
+      await platform.invokeMethod('moveTaskToBack');
+    } on PlatformException catch (e) {
+      Get.snackbar('Error', 'Failed to start monitoring: ${e.message}', snackPosition: SnackPosition.BOTTOM);
+    }
   }
+
 
   Future<List<String>> fetchPhoneNumbersFromDatabase() async {
     List<String> phoneNumbers = [];
@@ -74,6 +92,9 @@ class HomeController extends GetxController implements GetxService {
       Get.snackbar('Fail','${e.message}.', snackPosition: SnackPosition.BOTTOM);
     }
   }
+
+
+
 
 
 }
