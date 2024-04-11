@@ -68,6 +68,9 @@ dependencies:
   #경로 조작을 위한 일반적인 작업(결합, 분할, 정규화 등)을 제공합니다.
   path: ^1.8.3
 
+  # 이메일 전송
+  flutter_email_sender: ^6.0.2
+
 
 
 dev_dependencies:
@@ -125,13 +128,56 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
 fonts:
-  - family: 'bold'
+  - family: 'bold1'
     fonts:
       - asset: assets/fonts/Roboto-Bold.ttf
-  - family: 'medium'
+  - family: 'medium1'
     fonts:
       - asset: assets/fonts/Roboto-Medium.ttf
-  - family: 'regular'
+  - family: 'regular1'
     fonts:
       - asset: assets/fonts/Roboto-Regular.ttf
+  - family: 'thin'
+    fonts:
+      - asset: assets/fonts/Pretendard-Thin.ttf
+  - family: 'extraLight'
+    fonts:
+      - asset: assets/fonts/Pretendard-ExtraLight.ttf
+  - family: 'light'
+    fonts:
+      - asset: assets/fonts/Pretendard-Light.ttf
+  - family: 'regular'
+    fonts:
+      - asset: assets/fonts/Pretendard-Regular.ttf
+  - family: 'medium'
+    fonts:
+      - asset: assets/fonts/Pretendard-Medium.ttf
+  - family: 'semiBold'
+    fonts:
+      - asset: assets/fonts/Pretendard-SemiBold.ttf
+  - family: 'bold'
+    fonts:
+      - asset: assets/fonts/Pretendard-Bold.ttf
+  - family: 'extraBold'
+    fonts:
+      - asset: assets/fonts/Pretendard-ExtraBold.ttf
+  - family: black
+    fonts:
+      - asset: assets/fonts/Pretendard-Black.ttf
+  - family: numberThin
+    fonts:
+      - asset: assets/fonts/SpoqaHanSansNeo/SpoqaHanSansNeo-Thin.ttf
+  - family: numberLight
+    fonts:
+      - asset: assets/fonts/SpoqaHanSansNeo/SpoqaHanSansNeo-Light.ttf
+  - family: numberRegular
+    fonts:
+      - asset: assets/fonts/SpoqaHanSansNeo/SpoqaHanSansNeo-Regular.ttf
+  - family: numberMedium
+    fonts:
+      - asset: assets/fonts/SpoqaHanSansNeo/SpoqaHanSansNeo-Medium.ttf
+  - family: numberBold
+    fonts:
+      - asset: assets/fonts/SpoqaHanSansNeo/SpoqaHanSansNeo-Bold.ttf

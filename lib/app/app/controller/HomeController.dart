@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:sylph/app/backend/parse/home_parse.dart';
@@ -10,6 +11,8 @@ class HomeController extends GetxController implements GetxService {
 
   bool apiCalled = false;
   String title = '';
+
+  final phoneNumberController = TextEditingController();
 
   HomeController({required this.parser});
 

@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sylph/app/app/controller/HomeController.dart';
+import 'package:sylph/app/app/controller/ProfileController.dart';
 import 'package:sylph/app/app/controller/TabsController.dart';
 import 'package:sylph/app/backend/api/api.dart';
+import 'package:sylph/app/backend/parse/contact_us_parse.dart';
 import 'package:sylph/app/backend/parse/home_parse.dart';
+import 'package:sylph/app/backend/parse/profile_parse.dart';
 import 'package:sylph/app/backend/parse/splash_parse.dart';
 import 'package:sylph/app/backend/parse/tabs_parse.dart';
 import 'package:sylph/app/env.dart';
@@ -24,9 +27,12 @@ class MainBinding extends Bindings {
     Get.lazyPut(() => SplashScreenParse(sharedPreferencesManager: Get.find(), apiService: Get.find()));
     Get.lazyPut(() => TabsParser(sharedPreferencesManager: Get.find(), apiService: Get.find()),fenix: true);
     Get.lazyPut(() => HomeParse(sharedPreferencesManager: Get.find(), apiService: Get.find()),fenix: true);
+    Get.lazyPut(() => ProfileParse(sharedPreferencesManager: Get.find(), apiService: Get.find()),fenix: true);
+    Get.lazyPut(() => ContactUsParse(sharedPreferencesManager: Get.find(), apiService: Get.find()),fenix: true);
 
     Get.lazyPut(() => TabsController(parser: Get.find()),fenix: true);
     Get.lazyPut(() => HomeController(parser: Get.find()),fenix: true);
+    Get.lazyPut(() => ProfileController(parser: Get.find()),fenix: true);
 
 
   }

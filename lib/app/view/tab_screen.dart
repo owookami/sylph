@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sylph/app/app/controller/TabsController.dart';
 import 'package:sylph/app/view/homse_screen.dart';
+import 'package:sylph/app/view/profile_screen.dart';
 import 'package:sylph/theme.dart';
 
 class TabsScreen extends StatefulWidget {
@@ -41,10 +42,10 @@ class _TabsScreenState extends State<TabsScreen> {
                 ),
                 Tab(
                   icon: Icon(
-                    value.currentIndex != 1 ? Icons.history_outlined : Icons.history,
+                    value.currentIndex != 1 ? Icons.account_circle_outlined : Icons.account_circle,
                     color: value.currentIndex == 1 ? ThemeProvider.appColor : const Color.fromARGB(255, 185, 196, 207),
                   ),
-                  text: 'History'.tr,
+                  text: 'Profile'.tr,
                 ),
               ],
             )),
@@ -53,7 +54,7 @@ class _TabsScreenState extends State<TabsScreen> {
               physics: const NeverScrollableScrollPhysics(),
               children: [
                 HomeScreen(),
-                HomeScreen(),
+                ProfileScreen(),
               ],
             ),
           ),

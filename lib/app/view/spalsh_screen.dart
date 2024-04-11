@@ -11,7 +11,11 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SplashScreenController>(
@@ -23,18 +27,21 @@ class _SplashScreenState extends State<SplashScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  'assets/images/icon.png',
-                  fit: BoxFit.cover,
-                  height: 150,
-                  width: 150,
+                RotationTransition(
+                  turns: _animation,
+                  child: Image.asset(
+                    'assets/images/icon.png',
+                    fit: BoxFit.cover,
+                    height: 150,
+                    width: 150,
+                  ),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                const CircularProgressIndicator(
-                  color: ThemeProvider.appColor,
-                ),
+                // const CircularProgressIndicator(
+                //   color: ThemeProvider.appColor,
+                // ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -56,7 +63,23 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+
+    //로고 360도 회전
+    _controller = AnimationController(
+      duration: const Duration(seconds: 3),
+      vsync: this,
+    )..repeat(); // This ensures the animation continues indefinitely
+
+    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+
     _routing();
+  }
+
+
+  @override
+  void dispose() {
+    _controller.dispose(); //콘트롤러 삭제를 잊으면 안됨
+    super.dispose();
   }
 
   Future<void> _routing() async {

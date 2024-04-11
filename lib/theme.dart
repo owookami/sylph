@@ -21,7 +21,7 @@ class ThemeProvider {
   static const backgroundColor = Color.fromARGB(255, 243, 243, 243);
   static const transParent = Colors.transparent;
   static const titleStyle = TextStyle(
-      fontSize: 14, fontFamily: 'bold', color: ThemeProvider.whiteColor);
+      fontSize: 14, fontFamily: 'semiBold', color: ThemeProvider.whiteColor);
 }
 
 TextTheme txtTheme = Typography.whiteMountainView.copyWith(
@@ -74,7 +74,7 @@ heading1(val) {
   return Text(
     val,
     style: const TextStyle(
-        fontSize: 22, fontFamily: 'bold', color: ThemeProvider.blackColor),
+        fontSize: 40, fontFamily: 'extraBold', color: ThemeProvider.blackColor),
   );
 }
 
@@ -82,7 +82,7 @@ heading2(val) {
   return Text(
     val,
     style: const TextStyle(
-        fontSize: 18, fontFamily: 'medium', color: ThemeProvider.blackColor),
+        fontSize: 18, fontFamily: 'medium1', color: ThemeProvider.blackColor),
   );
 }
 
@@ -90,7 +90,7 @@ heading3(val) {
   return Text(
     val,
     style: const TextStyle(
-        fontSize: 16, fontFamily: 'medium', color: ThemeProvider.blackColor),
+        fontSize: 16, fontFamily: 'medium1', color: ThemeProvider.blackColor),
   );
 }
 
@@ -98,7 +98,7 @@ heading4(val) {
   return Text(
     val,
     style: const TextStyle(
-        fontSize: 14, fontFamily: 'medium', color: ThemeProvider.blackColor),
+        fontSize: 14, fontFamily: 'medium1', color: ThemeProvider.blackColor),
   );
 }
 
@@ -120,7 +120,7 @@ lightText(val) {
   return Text(
     val,
     style: const TextStyle(
-        fontSize: 14, fontFamily: 'medium', color: ThemeProvider.greyColor),
+        fontSize: 14, fontFamily: 'extraBold', color: ThemeProvider.greyColor),
   );
 }
 
@@ -135,7 +135,7 @@ smallBoldText(val) {
   return Text(
     val,
     style: const TextStyle(
-        fontFamily: 'medium', fontSize: 12, color: ThemeProvider.blackColor),
+        fontFamily: 'medium1', fontSize: 12, color: ThemeProvider.blackColor),
   );
 }
 

@@ -3,6 +3,7 @@ package com.vs.sylph.sylph;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -15,6 +16,9 @@ import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import androidx.core.app.ActivityCompat;
+import android.os.Handler;
+import android.os.Looper;
+
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -48,14 +52,47 @@ public class CallMonitoringService extends Service {
         NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "Call Monitoring Service", NotificationManager.IMPORTANCE_DEFAULT);
         getSystemService(NotificationManager.class).createNotificationChannel(channel);
 
+        createNotificationChannel(CHANNEL_ID);
+
+        // 서비스 종료 액션을 위한 PendingIntent 생성
+        Intent stopServiceIntent = new Intent(this, StopServiceReceiver.class);
+        PendingIntent stopServicePendingIntent = PendingIntent.getBroadcast(this, 0, stopServiceIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Sylph")
-                .setContentText("")
+                .setContentText("Tap to Stop the Service.")
                 .setSmallIcon(R.mipmap.ic_launcher) // Ensure you have a valid icon
+                .addAction(new NotificationCompat.Action(R.mipmap.ic_launcher, "Stop Service", stopServicePendingIntent)) // 서비스 종료 액션 추가))
                 .build();
+
+        // Adjusting flags for Android 12 (API level 31) and above
+        // notification 에서 swipe를 통해 앱 종료 -- 동작 안함
+        /*Intent deleteIntent = new Intent(this, StopServiceReceiver.class);
+        int flags = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) ? PendingIntent.FLAG_IMMUTABLE : PendingIntent.FLAG_UPDATE_CURRENT;
+        PendingIntent deletePendingIntent = PendingIntent.getBroadcast(this, 0, deleteIntent, flags);
+
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setContentTitle("Sylph")
+                .setContentText("Swipe to stop the service.")
+                .setSmallIcon(R.mipmap.ic_launcher) // Make sure you have a valid icon
+                .setDeleteIntent(deletePendingIntent) // Set the delete intent for swiping away the notification
+                .build();*/
 
         startForeground(1, notification);
     }
+
+    private void createNotificationChannel(String channelId) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Call Monitoring Service";
+            String description = "Channel for Call Monitoring Service";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(channelId, name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
 
     @Override
     public void onDestroy() {
@@ -69,19 +106,33 @@ public class CallMonitoringService extends Service {
         return null;
     }
 
-    private class CallStateListener extends PhoneStateListener {
+    /*private class CallStateListener extends PhoneStateListener {
         @Override
         public void onCallStateChanged(int state, String incomingNumber) {
             super.onCallStateChanged(state, incomingNumber);
             if (state == TelephonyManager.CALL_STATE_IDLE) {
                 // Call ended, check the call log and delete matches.
-                new handler().postDelayed(() -> {
+                new Handler().postDelayed(() -> {
                     checkAndDeleteMatchingCallLogs();
                 },3000);
 
             }
         }
+    }*/
+
+    private class CallStateListener extends PhoneStateListener {
+        @Override
+        public void onCallStateChanged(int state, String incomingNumber) {
+            super.onCallStateChanged(state, incomingNumber);
+            if (state == TelephonyManager.CALL_STATE_IDLE) {
+                // Call ended, wait a bit before checking and deleting the call log
+                new Handler().postDelayed(() -> {
+                    checkAndDeleteMatchingCallLogs();
+                },3000); // Delay execution for 3 seconds
+            }
+        }
     }
+
 
     private void checkAndDeleteMatchingCallLogs() {
         // Assuming deleteCallLogByNumber method is implemented here or in another helper class.
