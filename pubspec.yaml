@@ -1,5 +1,5 @@
 name: sylph
-description: sylph
+description: 바람의 요정
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: '>=3.0.3 <4.0.0'
@@ -70,6 +70,9 @@ dependencies:
 
   # 이메일 전송
   flutter_email_sender: ^6.0.2
+  
+  # 결제 플러그인
+  in_app_purchase: ^3.2.0
 
 
 
@@ -128,44 +131,16 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-
 fonts:
-  - family: 'bold1'
+  - family: bold
     fonts:
       - asset: assets/fonts/Roboto-Bold.ttf
-  - family: 'medium1'
+  - family: medium
     fonts:
       - asset: assets/fonts/Roboto-Medium.ttf
-  - family: 'regular1'
+  - family: regular
     fonts:
       - asset: assets/fonts/Roboto-Regular.ttf
-  - family: 'thin'
-    fonts:
-      - asset: assets/fonts/Pretendard-Thin.ttf
-  - family: 'extraLight'
-    fonts:
-      - asset: assets/fonts/Pretendard-ExtraLight.ttf
-  - family: 'light'
-    fonts:
-      - asset: assets/fonts/Pretendard-Light.ttf
-  - family: 'regular'
-    fonts:
-      - asset: assets/fonts/Pretendard-Regular.ttf
-  - family: 'medium'
-    fonts:
-      - asset: assets/fonts/Pretendard-Medium.ttf
-  - family: 'semiBold'
-    fonts:
-      - asset: assets/fonts/Pretendard-SemiBold.ttf
-  - family: 'bold'
-    fonts:
-      - asset: assets/fonts/Pretendard-Bold.ttf
-  - family: 'extraBold'
-    fonts:
-      - asset: assets/fonts/Pretendard-ExtraBold.ttf
-  - family: black
-    fonts:
-      - asset: assets/fonts/Pretendard-Black.ttf
   - family: numberThin
     fonts:
       - asset: assets/fonts/SpoqaHanSansNeo/SpoqaHanSansNeo-Thin.ttf

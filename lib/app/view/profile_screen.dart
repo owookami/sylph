@@ -32,12 +32,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Card(
                   child: ListTile(
                     onTap: () {
-
+                      value.purchase();
                     },
                     visualDensity: const VisualDensity(vertical: -3),
                     leading: const Icon(Icons.payment_outlined),
                     minLeadingWidth: 0,
-                    title: heading4('구독 설정'.tr),
+                    title: heading4('App 구매'.tr),
                     trailing: const Icon(Icons.chevron_right),
                   ),
                 ),

@@ -82,7 +82,7 @@ heading2(val) {
   return Text(
     val,
     style: const TextStyle(
-        fontSize: 18, fontFamily: 'medium1', color: ThemeProvider.blackColor),
+        fontSize: 18, fontFamily: 'medium', color: ThemeProvider.blackColor),
   );
 }
 
@@ -90,7 +90,7 @@ heading3(val) {
   return Text(
     val,
     style: const TextStyle(
-        fontSize: 16, fontFamily: 'medium1', color: ThemeProvider.blackColor),
+        fontSize: 16, fontFamily: 'medium', color: ThemeProvider.blackColor),
   );
 }
 
@@ -98,7 +98,7 @@ heading4(val) {
   return Text(
     val,
     style: const TextStyle(
-        fontSize: 14, fontFamily: 'medium1', color: ThemeProvider.blackColor),
+        fontSize: 14, fontFamily: 'medium', color: ThemeProvider.blackColor),
   );
 }
 
@@ -135,7 +135,7 @@ smallBoldText(val) {
   return Text(
     val,
     style: const TextStyle(
-        fontFamily: 'medium1', fontSize: 12, color: ThemeProvider.blackColor),
+        fontFamily: 'medium', fontSize: 12, color: ThemeProvider.blackColor),
   );
 }
 
